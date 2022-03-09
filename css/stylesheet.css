@@ -1,0 +1,17 @@
+.button {
+    /* 按钮样式*/
+    width: 100px;
+    height: 30px;
+    line-height: 15px;
+    background-color: rgb(255, 51, 0);
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.floatButton {
+    position: fixed;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
