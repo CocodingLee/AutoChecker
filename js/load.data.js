@@ -1,10 +1,15 @@
-var xspr
+// Global var
+var g_xspr
 
 function load() {
     var xs = x_spreadsheet('#x-spreadsheet-auto-checker', {
         showToolbar: true,
         showGrid: true,
-        showBottomBar: true
+        showBottomBar: true,
+        row: {
+            len: 20000,
+            height: 25,
+        }
     })
 
     xs.on('cell-selected', (cell, ri, ci) => {
@@ -15,7 +20,7 @@ function load() {
         console.log('>>>> data is ', data);
     });
 
-    xspr = xs
+    g_xspr = xs
 }
 
 function stox(wb) {
@@ -65,7 +70,7 @@ var process_wb = (function() {
         var data = stox(wb);
 
         /* update x-spreadsheet */
-        xspr.loadData(data);
+        g_xspr.loadData(data);
         //XPORT.disabled = false;
 
         if (typeof console !== 'undefined') console.log("output", new Date());
@@ -98,5 +103,7 @@ function import_file(files) {
 }
 
 function export_file() {
-    console.log('exportFile clicked');
+    var new_wb = xtos(g_xspr.getData());
+    /* write file and trigger a download */
+    XLSX.writeFile(new_wb, 'sheetjs.xlsx', {});
 }
